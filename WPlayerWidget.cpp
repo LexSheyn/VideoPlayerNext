@@ -2,6 +2,7 @@
 
 #include "WCameraTab.h"
 #include "WSettingTab.h"
+#include "WDiagnosticTab.h"
 
 #include <QMediaPlayer>
 #include <QVideoWidget>
@@ -28,6 +29,7 @@ WPlayerWidget::WPlayerWidget(QWidget *parent)
     m_tabWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Maximum);
     m_tabWidget->addTab(new WCameraTab(), "Camera");
     m_tabWidget->addTab(new WSettingTab(), "Settings");
+    m_tabWidget->addTab(new WDiagnosticTab(), "Diagnostics");
 
     m_openFileButton = new QPushButton(tr("Open File"));
     m_openFileButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);

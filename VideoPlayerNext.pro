@@ -13,6 +13,7 @@ CONFIG -= app_bundle
 
 SOURCES += \
         WCameraTab.cpp \
+        WDiagnosticTab.cpp \
         WPlayerWidget.cpp \
         WSettingTab.cpp \
         main.cpp
