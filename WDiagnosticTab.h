@@ -1,0 +1,4 @@
+#ifndef WDIAGNOSTICTAB_H
+#define WDIAGNOSTICTAB_H
+
+#endif // WDIAGNOSTICTAB_H
