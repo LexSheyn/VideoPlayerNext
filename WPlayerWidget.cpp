@@ -19,14 +19,12 @@ WPlayerWidget::WPlayerWidget(QWidget *parent)
 {
     m_videoWidget = new QVideoWidget();
     m_videoWidget->setMinimumSize(320, 180);
-    m_videoWidget->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
 
     m_mediaPlayer = new QMediaPlayer();
     m_mediaPlayer->setVideoOutput(m_videoWidget);
 
     m_tabWidget = new QTabWidget();
     m_tabWidget->setMinimumSize(64, 180);
-    m_tabWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Maximum);
     m_tabWidget->addTab(new WCameraTab(), "Camera");
     m_tabWidget->addTab(new WSettingTab(), "Settings");
     m_tabWidget->addTab(new WDiagnosticTab(), "Diagnostics");
@@ -51,17 +49,31 @@ WPlayerWidget::WPlayerWidget(QWidget *parent)
 
     connect(m_stopButton, &QAbstractButton::clicked, m_mediaPlayer, &QMediaPlayer::stop);
 
-    QGridLayout* layout = new QGridLayout();
+    QVBoxLayout* mainLayout = new QVBoxLayout();
+    QHBoxLayout* videoLayout = new QHBoxLayout();
+    QHBoxLayout* buttonLayout = new QHBoxLayout();
 
-    layout->addWidget(m_videoWidget,    0, 0, 4, 5);
-    layout->addWidget(m_openFileButton, 5, 0, 1, 1);
-    layout->addWidget(m_playButton,     5, 1, 1, 1);
-    layout->addWidget(m_pauseButton,    5, 2, 1, 1);
-    layout->addWidget(m_stopButton,     5, 3, 1, 1);
-    layout->addWidget(m_tabWidget,      0, 15, 1, 1);
+    mainLayout->addLayout(videoLayout);
+    mainLayout->addLayout(buttonLayout);
+
+    videoLayout->addWidget(m_videoWidget);
+    videoLayout->addWidget(m_tabWidget);
+    videoLayout->setStretch(0, 5);
+    videoLayout->setStretch(1, 1);
+
+    buttonLayout->addWidget(m_openFileButton);
+    buttonLayout->addWidget(m_playButton);
+    buttonLayout->addWidget(m_pauseButton);
+    buttonLayout->addWidget(m_stopButton);
+    buttonLayout->addWidget(new QWidget());
+    buttonLayout->setStretch(0, 1);
+    buttonLayout->setStretch(1, 1);
+    buttonLayout->setStretch(2, 1);
+    buttonLayout->setStretch(3, 1);
+    buttonLayout->setStretch(4, 2);
 
     this->setMinimumSize(698, 360);
-    this->setLayout(layout);
+    this->setLayout(mainLayout);
 }
 
 WPlayerWidget::~WPlayerWidget()
